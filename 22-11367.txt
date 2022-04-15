@@ -1,0 +1,11 @@
+Step1: First, I used the command "ifconfig" to check the IP of Metasploitable 2, then I used Kali inux to ping the IP to see if it was still alive. Then use Firefox to visit the IP, which will open a portal with several applications such as TWiki, phpMyAdmin, Mutillidae, and so on.
+Step2: Follow the way from the side pane "OWASP Top 10">"A1 - Injection">"SQLi Extract Data"> "User Info" on the Mutillidae portal. The Login Portal will appear.
+Step3: Open Burp Suite and select the proxy tab. If an ip address is shown in the settings, click itercept and make sure it's turned on.
+Step4: Change the setting in Firefox's network settings to "Manual proxy configuration" and enter the IP address and port number from Burp Suite.
+Step5: Check if Burp Suite is recording requests by going to the login portal and logging in using a random username and password. If the data is captured, save the item to your desktop with the name "request.txt" so you may utilise it later. Close the Burp Suite and turn off the intercept.
+Step6: Change the firefox network settings back to default now that you've captured the request with Burp Suite ip.
+Step7: Using the terminal, type "sqlmap" and press enter to launch the application that will be utilised right now.
+Step8: Enter "sqlmap -r /root/Desktop/request.txt —dbs" into the command prompt. It will examine the request and look for flaws.
+Step9: After the scan is finished, use the command "sqlmap -r /root/Desktop/extract.txt -D mysql —tables" to see all the tables in the database.
+Step10: "sqlmap -r /root/Desktop/extract.txt -D mysql -T accounts —dump" extracts and displays all of the data in that table, which we may exploit to get access.
+ 
